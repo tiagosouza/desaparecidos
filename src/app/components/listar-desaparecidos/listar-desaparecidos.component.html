@@ -1,0 +1,92 @@
+<app-buscar-desaparecidos></app-buscar-desaparecidos>
+
+<div class="row resultado">
+  <br />
+  <mat-divider></mat-divider><br />
+  <h1>Lista dos Resultados</h1>
+  <mat-divider></mat-divider><br />
+  <div class="loading-indicator"></div>
+</div>
+<div
+  *ngIf="!loading"
+  fxLayout="row"
+  fxLayoutAlign="space-around center"
+  style="height: 100%"
+>
+  <p *ngIf="!(paginacao.length > 0)">Nenhum resultado encontrado.</p>
+</div>
+<div
+  *ngIf="loading"
+  fxLayout="row"
+  fxLayoutAlign="space-around center"
+  style="height: 100%"
+>
+  <mat-spinner diameter="100" strokeWidth="10"></mat-spinner>
+</div>
+
+<div fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div
+    [fxFlex]="100 / gridColumns + '%'"
+    fxFlex.xs="100%"
+    fxFlex.sm="50%"
+    fxFlex.lt-lg="33%"
+    fxFlex.gt-sm="25%"
+    *ngFor="let element of lista"
+  >
+    <mat-card class="mat-elevation-z8" (click)="maisInfomacoes(element.id)">
+      <mat-card-header>
+        <mat-card-title>{{ element.nome }}</mat-card-title>
+        <mat-card-subtitle
+          >( {{ element.sexo }} ) {{ element.idade }} anos
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <div class="image-container" *ngIf="element.urlFoto" >
+        <div class="bg-image" [style.background-image]="'url(' + element.urlFoto + ')'"></div>
+        <img  [src]="element.urlFoto" />
+        
+      </div>
+
+      <div class="image-container" *ngIf="!element.urlFoto">
+        <div class="bg-image"  [style.background-image]="'url(../../../assets/img/avatar.jpg)'" > 
+        </div>
+        <img src='../../../assets/img/avatar.jpg'     />
+        
+      </div>
+
+      
+
+      <mat-card-content>
+        <p class="paragrafo_20">
+          Local do Desaparecimento 
+        </p>
+        <p class="paragrafo_60">
+          {{ element.ultimaOcorrencia.localDesaparecimentoConcat }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-stroked-button
+          color="accent"
+          (click)="maisInfomacoes(element.id)"
+        >
+          Maiores Informações
+          <mat-icon iconPositionEnd >info</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<mat-paginator
+  *ngIf="paginacao.length > 0"
+  #paginator
+  (page)="handlePageEvent($event)"
+  [length]="paginacao.length"
+  [showFirstLastButtons]="true"
+  [hidePageSize]="true"
+  [pageSize]="paginacao.pageSize"
+  [pageIndex]="paginacao.pageIndex"
+  aria-label="Select page"
+>
+</mat-paginator>

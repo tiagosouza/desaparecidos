@@ -1,0 +1,143 @@
+<div
+  *ngIf="loading"
+  fxLayout="row"
+  fxLayoutAlign="space-around center"
+  class="center"
+>
+  <p>Buscado dados...</p>
+  <mat-spinner diameter="100" strokeWidth="10"></mat-spinner>
+</div>
+
+<div
+  *ngIf="!loading && !pessoaDetalehes"
+  fxLayout="row"
+  fxLayoutAlign="space-around center"
+  class="center"
+>
+  <p>Falha na solicitação, tente mais tarde.</p>
+</div>
+
+<div
+  fxLayout="row"
+  fxLayout.gt-sm="row wrap"
+  fxLayout="column"
+  *ngIf="pessoaDetalehes"
+>
+  <div fxFlex="100" class="title">
+    <h1>DESAPARECIDO</h1>
+  </div>
+
+  <div fxFlex="100" fxFlex.gt-sm="50" class="image">
+    <mat-card class="mat-elevation-z8">
+      <div class="image-container" *ngIf="pessoaDetalehes.urlFoto">
+        <div
+          class="bg-image"
+          [style.background-image]="'url(' + pessoaDetalehes.urlFoto + ')'"
+        ></div>
+        <img [src]="pessoaDetalehes.urlFoto" />
+      </div>
+
+      <div class="image-container" *ngIf="!pessoaDetalehes.urlFoto">
+        <div
+          class="bg-image"
+          [style.background-image]="'url(../../../assets/img/avatar.jpg)'"
+        ></div>
+        <img src="../../../assets/img/avatar.jpg" />
+      </div>
+      <mat-card-actions>
+        <button mat-stroked-button color="primary" (click)="foto()">
+          Baixar Foto
+          <mat-icon iconPositionEnd>download</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div fxFlex="100" fxFlex.gt-sm="50">
+    <mat-card class="card-wrapper">
+      <mat-card-content class="card-container">
+        <h1>
+          <!-- <strong>Nome : </strong>  -->
+          <strong>{{ pessoaDetalehes?.nome }}</strong>
+        </h1>
+        <p>
+          Desaparecido em
+          {{
+            this.pessoaDetalehes.ultimaOcorrencia?.dtDesaparecimento
+              | date : "dd/MM/yyyy HH:mm"
+          }}
+          ({{ this.tempoDesaparecido }} dias)
+        </p>
+
+        <p>{{ pessoaDetalehes.idade }} anos ( {{ pessoaDetalehes.sexo }} )</p>
+
+        <h2>
+          <strong>Local do Desaparecimento</strong>
+        </h2>
+        <h1>
+          {{ pessoaDetalehes?.ultimaOcorrencia?.localDesaparecimentoConcat }}
+        </h1>
+        <h3>
+          <strong>Informações : </strong>
+          {{
+            pessoaDetalehes?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
+              ?.informacao
+          }}
+        </h3>
+        <h3>
+          <strong>Vestimentas : </strong>
+          {{
+            pessoaDetalehes?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
+              ?.vestimentasDesaparecido
+          }}
+        </h3>
+      </mat-card-content>
+      <div fxLayout="row" fxLayoutAlign="space-around center" class="center">
+        <p>Ajude na divulgação</p>
+      </div>
+      <mat-card-actions>
+        <div fxLayoutAlign="space-between center">
+          <button
+            [disabled]="!(listaCartaz?.length > 0)"
+            mat-stroked-button
+            color="accent"
+            (click)="instagram()"
+          >
+            Instagram
+            <mat-icon iconPositionEnd>favorite</mat-icon>
+          </button>
+          <a [href]="currentURL" target="_blank">
+            <button mat-stroked-button class="green">
+              Whatsapp
+
+              <mat-icon iconPositionEnd>share</mat-icon>
+            </button></a>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div fxFlex="100" class="title">
+    <h1>Possui alguma informação?</h1>
+    <button mat-stroked-button color="warn" (click)="openDialog()">
+      Conte-nos
+
+      <mat-icon iconPositionEnd>send</mat-icon>
+    </button>
+  </div>
+</div>
+
+<!-- 
+  <div class="image-container" *ngIf="pessoaDetalehes.urlFoto" >
+    <div class="bg-image" [style.background-image]="'url(' + pessoaDetalehes.urlFoto + ')'"></div>
+    <img  [src]="pessoaDetalehes.urlFoto" />
+    
+  </div>
+
+  <div class="image-container" *ngIf="!pessoaDetalehes.urlFoto">
+    <div class="bg-image"  [style.background-image]="'url(../../../assets/img/avatar.jpg)'" > 
+    </div>
+    <img src='../../../assets/img/avatar.jpg'     />
+    
+  </div>
+</div> -->

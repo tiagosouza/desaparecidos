@@ -1,0 +1,81 @@
+mat-card-actions {
+  align-self: center;
+}
+
+mat-card-header {
+  background-color: aliceblue;
+  max-width: 100%;
+  padding: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+button {
+  font-size: large;
+  margin: 10px;
+}
+.title {
+  text-align: center;
+  padding: 30px;
+  h1{
+    font-size: 2.0em;
+    font-weight: bold;
+  }
+}
+
+
+
+.green {
+    color: green !important;
+}
+
+.image{
+    
+    // border: solid coral;
+    padding: 0 8% 20px;
+}
+
+.mat-mdc-card {
+  position: relative;
+  cursor: pointer;
+}
+.mat-mdc-card-content {
+  display: block;
+  padding: 16px 16px;
+  width: 96%;
+  text-align: center;
+}
+
+.image-container {
+  display: inline;
+  overflow: hidden;
+  height: 400px;
+}
+
+.bg-image {
+  filter: blur(30px);
+  -webkit-filter: blur(30px);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+img {
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.center {
+  height: 100%;
+  display: grid !important;
+}
+
+.cartaz {
+  flex: 10 20 auto;
+  display: grid;
+}
