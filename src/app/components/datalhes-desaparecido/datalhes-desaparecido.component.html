@@ -40,9 +40,9 @@
       <div class="image-container" *ngIf="!pessoaDetalehes.urlFoto">
         <div
           class="bg-image"
-          [style.background-image]="'url(../../../assets/img/avatar.jpg)'"
+          [style.background-image]="'url(assets/img/avatar.jpg)'"
         ></div>
-        <img src="../../../assets/img/avatar.jpg" />
+        <img src="assets/img/avatar.jpg" />
       </div>
       <mat-card-actions>
         <button mat-stroked-button color="primary" (click)="foto()">
@@ -126,18 +126,3 @@
     </button>
   </div>
 </div>
-
-<!-- 
-  <div class="image-container" *ngIf="pessoaDetalehes.urlFoto" >
-    <div class="bg-image" [style.background-image]="'url(' + pessoaDetalehes.urlFoto + ')'"></div>
-    <img  [src]="pessoaDetalehes.urlFoto" />
-    
-  </div>
-
-  <div class="image-container" *ngIf="!pessoaDetalehes.urlFoto">
-    <div class="bg-image"  [style.background-image]="'url(../../../assets/img/avatar.jpg)'" > 
-    </div>
-    <img src='../../../assets/img/avatar.jpg'     />
-    
-  </div>
-</div> -->
